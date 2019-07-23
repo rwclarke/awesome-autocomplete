@@ -1,0 +1,91 @@
+<div class="autocomplete">
+  {{input  
+    id=(concat id "-autocomplete")
+    type="text"
+    value=text
+    key-up=(action "keyup")
+    focus-in=(action (mut is_open) true)
+    placeholder=placeholder
+  }}
+  <div class={{if is_open "autocomplete-items" "autocomplete-items-hidden"}}>
+    {{#each results as |item index|}}
+      <div class={{if (is-equal index current_index) "autocomplete-active" ""}} {{action "select" item on="click"}}>
+        {{get-value item fieldname}}
+      </div>
+    {{/each}}
+  </div>
+</div>
+
+<style>
+  .autocomplete {
+    position: relative;
+    display: inline-block;
+    width: 100%;
+  }
+  
+  input {
+    border: 1px solid #cccccc;
+    background-color: transparent;
+    font-size: 14px;
+    border-radius: 0px;
+    height: 40px;
+    width: 100%;
+  }
+  
+  input[type=text] {
+    background-color: #ffffff;
+    border: 1px solid #cccccc;
+    width: 100%;
+    color: #000000;
+    width: 100%;
+    padding-left: 10px;
+    -webkit-box-sizing: border-box; /* Safari/Chrome, other WebKit */
+    -moz-box-sizing: border-box;    /* Firefox, other Gecko */
+    box-sizing: border-box;  
+  }
+
+  .autocomplete-items-hidden {
+    display: none;
+  }
+    
+  .autocomplete-items {
+    position: absolute;
+    border: 1px solid #cccccc;
+    z-index: 99;
+    /*position the autocomplete items to be the same width as the container:*/
+    top: 100%;
+    left: 0;
+    right: 0;
+    color: #000000;
+    text-align: left;
+    width: 100%;
+  }
+  
+  .autocomplete-items div {
+    padding: 10px;
+    cursor: pointer;
+    background-color: transparent; 
+    color: #000000;
+    text-align: left;
+    border-bottom: 1px solid #cccccc;
+  }
+  
+
+  .autocomplete-items div {
+    background-color: #ffffff; 
+    color: #000000; 
+    text-align: left;
+  }
+
+  .autocomplete-items div:hover {
+    background-color: #f1f1f1;
+    color: #000000;
+    text-align: left;
+  }
+
+  .autocomplete-items div.autocomplete-active {
+    background-color: #f1f1f1 !important; 
+    color: #000000;
+    text-align: left;
+  }
+</style>
