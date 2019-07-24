@@ -1,7 +1,7 @@
 awesome-autocomplete
 ==============================================================================
 
-[Short description of the addon.]
+An ember add-on to allow you to easily add integrate an autocomplete input field that can easily be tied into any backend api. Ie. Google Places, your owner server, anything. 
 
 Installation
 ------------------------------------------------------------------------------
@@ -14,7 +14,51 @@ ember install awesome-autocomplete
 Usage
 ------------------------------------------------------------------------------
 
-[Longer description of how to use the addon in apps.]
+Controller:
+```
+--
+selectedText: "Bojack Horseman",
+data: [
+  {
+    id: 1,
+    name: 'Bojack Horseman'
+  },
+  {
+    id: 2,
+    name: 'Billy Bee'
+  },
+  {
+    id: 3,
+    name: 'Rick Sanchez'
+  }
+],
+
+onChange(value) {
+  /* query your api with the value 
+    const data = await fetch(`https://yourawesomeapi.com/lookup?q=value`);
+    this.set('data', data);
+  */
+},
+
+onSelected(item) {
+  this.set('selectedText', item.name);
+  /* do something with the item */
+},
+```
+
+Handlebars Component:
+```
+--
+{{awesome-autocomplete 
+  id='aa9eb49d-16f3-4ba2-974d-29baecfddc03' /* unique id for the component */
+  fieldname="name" /* the key to display in the input */
+  results=data /* the search results from your API */
+  search=(action "onChange") /* the action to be called when a user types defaults at 300ms debounce */
+  onchange=(action "onSelected") /* the action to be called after a user select item */
+  placeholder="Type to search"
+  text=selectedText /* the default text for the input / you should assign this value after on change */
+}}
+```
 
 
 Contributing
