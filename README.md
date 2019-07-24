@@ -16,7 +16,6 @@ Usage
 
 Controller:
 ```
---
 selectedText: "Bojack Horseman",
 data: [
   {
@@ -48,7 +47,6 @@ onSelected(item) {
 
 Handlebars Component:
 ```
---
 {{awesome-autocomplete 
   id='aa9eb49d-16f3-4ba2-974d-29baecfddc03' /* unique id for the component */
   fieldname="name" /* the key to display in the input */
