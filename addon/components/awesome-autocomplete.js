@@ -22,6 +22,12 @@ export default Component.extend({
       }
     });
     document.getElementById(`${this.id}-autocomplete`).addEventListener("keydown", (e) => {
+
+      if (e.keyCode !== 40 && e.keyCode !== 38 && e.keyCode !== 13) {
+        document.getElementById(`${this.id}-autocomplete`).focus();
+        this.set('is_open', true);
+      }
+
       if (e.keyCode == 40) {
         /*If the arrow DOWN key is pressed,
         increase the currentFocus variable:*/
