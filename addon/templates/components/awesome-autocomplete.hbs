@@ -6,6 +6,7 @@
     key-up=(action "keyup")
     focus-in=(action (mut is_open) true)
     placeholder=placeholder
+    autocomplete="off"
   }}
   <div class={{if is_open "autocomplete-items" "autocomplete-items-hidden"}}>
     {{#each results as |item index|}}
