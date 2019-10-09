@@ -28,7 +28,7 @@ export default Component.extend({
         try {
           this.set('is_open', true);
         } catch(e) {
-          console.log(e);
+          // ignore
         }
       }
 
@@ -39,7 +39,7 @@ export default Component.extend({
           try {
             this.set('current_index', this.current_index + 1);
           } catch(e) {
-            console.log(e);
+            // ignore
           }
         }
       } else if (e.keyCode == 38) { //up
@@ -49,7 +49,7 @@ export default Component.extend({
           try {
             this.set('current_index', this.current_index - 1);
           } catch(e) {
-            console.log(e);
+            // ignore
           }
         }
       } else if (e.keyCode == 13) {
@@ -65,7 +65,7 @@ export default Component.extend({
     try {
       this.set('is_open', false);
     } catch(e) {
-      console.log(e);
+      // ignore
     }
   },
 
@@ -73,7 +73,7 @@ export default Component.extend({
     try {
       this.send('select', this.results[this.current_index]);
     } catch(e) {
-      console.log(e);
+      // ignore
     }
   },
 
@@ -90,7 +90,7 @@ export default Component.extend({
         this.set('text', item[this.fieldname]);
         this.sendAction('onchange', item);
       } catch(e) {
-        console.log(e);
+        // ignore
       }
     },
 
