@@ -15,7 +15,7 @@ export default Component.extend({
   current_index: 0,
   
   didInsertElement() {
-    this._super(...arguments);    
+    this._super(...arguments);      
     document.addEventListener("click", (e) => {
       if (e.target.id !== `${this.id}-autocomplete`) {
         this.onBlur(); 
@@ -25,20 +25,32 @@ export default Component.extend({
 
       if (e.keyCode !== 40 && e.keyCode !== 38 && e.keyCode !== 13) {
         document.getElementById(`${this.id}-autocomplete`).focus();
-        this.set('is_open', true);
+        try {
+          this.set('is_open', true);
+        } catch(e) {
+          console.log(e);
+        }
       }
 
       if (e.keyCode == 40) {
         /*If the arrow DOWN key is pressed,
         increase the currentFocus variable:*/
         if ((this.current_index + 1) < this.results.length) {
-          this.set('current_index', this.current_index + 1);
+          try {
+            this.set('current_index', this.current_index + 1);
+          } catch(e) {
+            console.log(e);
+          }
         }
       } else if (e.keyCode == 38) { //up
         /*If the arrow UP key is pressed,
         decrease the currentFocus variable:*/
         if (this.current_index > 0) {
-          this.set('current_index', this.current_index - 1);
+          try {
+            this.set('current_index', this.current_index - 1);
+          } catch(e) {
+            console.log(e);
+          }
         }
       } else if (e.keyCode == 13) {
         /*If the ENTER key is pressed, prevent the form from being submitted,*/
@@ -50,11 +62,19 @@ export default Component.extend({
   },
 
   onBlur() {
-    this.set('is_open', false);
+    try {
+      this.set('is_open', false);
+    } catch(e) {
+      console.log(e);
+    }
   },
 
   onEnterPress() {
-    this.send('select', this.results[this.current_index]);
+    try {
+      this.send('select', this.results[this.current_index]);
+    } catch(e) {
+      console.log(e);
+    }
   },
 
   onKeyup() {
@@ -64,10 +84,14 @@ export default Component.extend({
   actions: {
 
     select(item) {
-      this.set('current_index', 0);
-      this.set('is_open', false);
-      this.set('text', item[this.fieldname]);
-      this.sendAction('onchange', item);
+      try {
+        this.set('current_index', 0);
+        this.set('is_open', false);
+        this.set('text', item[this.fieldname]);
+        this.sendAction('onchange', item);
+      } catch(e) {
+        console.log(e);
+      }
     },
 
     keyup() {
